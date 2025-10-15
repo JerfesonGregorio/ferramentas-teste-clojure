@@ -12,3 +12,10 @@
         :else (str "Leve um casaco em " city "!")))
     ;; Caso a API não retorne dados
     (str "Não foi possível obter a previsão para " city ".")))
+
+(defn get-recommendation-details
+  "Retorna um mapa com a recomendação e os dados originais da API."
+  [city]
+  (when-let [weather-data (api/fetch-weather-data city)]
+    {:recommendation (generate-recommendation city)
+     :source-data weather-data}))
