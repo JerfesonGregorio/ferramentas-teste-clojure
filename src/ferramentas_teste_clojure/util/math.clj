@@ -6,3 +6,5 @@
     ;else
     (reduce * (range 1 (inc n)))))
 
+(defn soma [a b]
+  (+ a b))

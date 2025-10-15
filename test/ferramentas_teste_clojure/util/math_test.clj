@@ -3,7 +3,7 @@
             [ferramentas-teste-clojure.util.math :as math-util]))
 
 ;=============================
-; CLOJURE.TEST
+;       CLOJURE.TEST
 ;=============================
 
 (defn uma-vez-por-namespace-fixture [f]
@@ -27,3 +27,20 @@
 (t/deftest fatorial-casos-de-borda-test
   (t/testing "Cálculo de fatorial para casos de borda"
     (t/is (nil? (math-util/fatorial -5)) "Fatorial de negativos devem ser nil")))
+
+(t/deftest soma-com-are-test
+         (t/testing "Testando a função soma com múltiplos valores"
+                  (t/are [resultado-esperado x y] (= resultado-esperado (math-util/soma x y))
+                       ;; Cada linha abaixo é um conjunto de dados para [resultado-esperado x y]
+                       4    2    2
+                       0   -1    1
+                       100  50   50
+                       -5  -2   -3
+                       99   99   0
+                       )))
+
+(t/run-test soma-com-are-test) ; Roda teste específico
+(t/run-all-tests) ; Roda todos os testes referentes a uma regex. Sem regex roda todos os testes por default.
+
+(t/run-tests) ; Roda testes de namespaces específicos
+;; user=> (clojure.test/run-tests 'exemplo-testes.util.math-test 'exemplo-testes.util.string-test)
